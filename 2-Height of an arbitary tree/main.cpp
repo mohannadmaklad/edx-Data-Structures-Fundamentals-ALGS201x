@@ -93,14 +93,18 @@ int arrMax(int arr[],int numOfelements)
 
 int calculateHeight(Node *head)
 {
- 	int kidsNum = head->children.size();
- 	int *countt= (int*)calloc(kidsNum,sizeof(int));
+    int kidsNum = head->children.size();
+    int *countt= (int*)calloc(kidsNum,sizeof(int));
+    int maxReturn = 0;
 
-	if(kidsNum == 0) return 1;
+    if(kidsNum == 0) return 1;
     else
-    for(int i=0; i < kidsNum ; i++)
-        countt[i] = 1+calculateHeight(head->children[i]);
-
-     return (arrMax(countt,kidsNum));
+    {
+        for(int i=0; i < kidsNum ; i++)
+            countt[i] = 1+calculateHeight(head->children[i]);
+        maxReturn = arrMax(countt,kidsNum);
+        free(countt);
+        return (maxReturn);
+    }
 }
 
